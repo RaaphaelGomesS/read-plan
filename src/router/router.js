@@ -4,6 +4,7 @@ import BookController from '../controller/BookController.js'
 
 const router = express.Router();
 
+router.get("/{id}", UserController.createUser);
 router.post("/create", UserController.createUser);
 
 router.post("/create", BookController.creatBook);
