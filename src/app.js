@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import router from "./router/router.js";
+import "dotenv/config";
 
 const app = express();
 
@@ -15,6 +16,6 @@ app.use((err, req, res, next) => {
   res.status(status).json({ error: err.message });
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("aplicação rodando!");
 });
