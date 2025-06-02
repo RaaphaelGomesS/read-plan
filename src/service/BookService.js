@@ -1,11 +1,22 @@
 import prisma from "../../prisma/prismaClient.js";
-import Validation from "../utils/Validation.js";
 import { BookError } from "../errors/Error.js";
 
 class BookService {
-  async getAllBooks() {}
+  async getAllBooks(id) {
+    const books = prisma.book.findMany({
+      where: { id, finished: false },
+    });
 
-  async getAllFinishedBooks() {}
+    return books;
+  }
+
+  async getAllFinishedBooks(id) {
+    const books = prisma.book.findMany({
+      where: { id, finished: true },
+    });
+
+    return books;
+  }
 
   async createBook(data) {
     const book = await prisma.book.create({
@@ -26,12 +37,12 @@ class BookService {
     return book;
   }
 
-  async finishBook(id, data) {
+  async finishBook(id) {
     await this.findById(id);
 
     const book = await prisma.book.update({
       where: { id },
-      data: {},
+      data: { finished: true },
     });
 
     return book;

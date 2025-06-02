@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import UserService from "./UserService.js";
 import { UserError } from "../error/Error.js";
+import BookService from "./BookService.js";
 
 class AuthService {
   async authentication(req, res, next) {
@@ -26,6 +27,17 @@ class AuthService {
     if (tokenId != userId) {
       throw new UserError(
         "você não possui permissão para acessar/alterar informações de outro usuário!",
+        403
+      );
+    }
+  }
+
+  async verifyHaveBookPermission(tokenId, bookId) {
+    const book = await BookService.findById(bookId);
+
+    if (tokenId != book.userId) {
+      throw new UserError(
+        "você não possui permissão para acessar/alterar informações desse livro!",
         403
       );
     }
