@@ -1,4 +1,4 @@
-class BookError extends Error {
+export class BookError extends Error {
 
     constructor(message, statusCode) {
         super(message);
@@ -6,12 +6,10 @@ class BookError extends Error {
     };
 };
 
-class UserError extends Error {
+export class UserError extends Error {
 
     constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
     };
 };
-
-export default {BookError, UserError};

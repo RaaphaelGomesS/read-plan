@@ -4,9 +4,15 @@ import BookController from '../controller/BookController.js'
 
 const router = express.Router();
 
-router.get("/{id}", UserController.createUser);
-router.post("/create", UserController.createUser);
+router.get("/:id", UserController.getUser);
+router.post("/login", UserController.login);
+router.post("/create", UserController.register);
+router.update("/:id", UserController.updateUser);
+router.delete("/:id", UserController.deleteUser);
 
-router.post("/create", BookController.creatBook);
+router.post("/book", BookController.creatBook);
+router.post("/book", BookController.creatBook);
+router.post("/book", BookController.creatBook);
+router.post("/book", BookController.creatBook);
 
 export default router;
