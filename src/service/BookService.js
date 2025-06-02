@@ -18,23 +18,23 @@ class BookService {
     return books;
   }
 
-  async createBook(data) {
-    const book = await prisma.book.create({
-      data: {},
+  async insertBooks(id, data) {
+
+    const booksToInsert = data.map(book => ({
+        title: book.title,
+        author: book.authors.join(","),
+        publisher: book.publisher,
+        categoty: book.categories.join(","),
+        pages: book.pages,
+        img: book.image,
+        userId: id,
+    }));
+
+    const howMany = await prisma.book.create({
+      data: {booksToInsert},
     });
 
-    return book;
-  }
-
-  async updateBook(id, data) {
-    await this.findById(id);
-
-    const book = await prisma.book.update({
-      where: { id },
-      data: {},
-    });
-
-    return book;
+    return howMany;
   }
 
   async finishBook(id) {
