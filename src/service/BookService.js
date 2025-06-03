@@ -4,11 +4,11 @@ import { BookError } from "../errors/Errors.js";
 class BookService {
   async getAllBooks(id) {
     const books = await prisma.book.findMany({
-      where: { userId: id, finished: false },
+      where: { user_id: id, finished: false },
     });
 
     if (books.length === 0) {
-      return "Sua lista está vazia!";
+      return [];
     }
 
     return books;
@@ -16,33 +16,27 @@ class BookService {
 
   async getAllFinishedBooks(id) {
     const books = await prisma.book.findMany({
-      where: { userId: id, finished: true },
+      where: { user_id: id, finished: true },
     });
 
     if (books.length === 0) {
-      return "Nenhum livro foi finalizado!";
+      return [];
     }
 
     return books;
   }
 
   async insertBooks(id, data) {
-
-    console.log(data.books);
-
     const booksToInsert = data.books.map((book) => ({
       title: book.title,
-      author: book.authors.join(","),
-      publisher: book.publisher,
-      category: book.categories.join(","),
+      author: book.authors,
+      category: book.categories,
       pages: book.pages,
       img: book.image,
-      userId: id,
+      user_id: id,
     }));
 
-    console.log(booksToInsert);
-
-    await prisma.book.createMany({
+   await prisma.book.createMany({
       data: booksToInsert,
       skipDuplicates: true,
     });

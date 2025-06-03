@@ -35,7 +35,7 @@ class AuthService {
   async verifyHaveBookPermission(tokenId, bookId) {
     const book = await BookService.findById(bookId);
 
-    if (tokenId != book.userId) {
+    if (tokenId != book.user_id) {
       throw new UserError(
         "você não possui permissão para acessar/alterar informações desse livro!",
         403
