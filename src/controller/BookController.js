@@ -25,8 +25,8 @@ class BookController {
   async insertBooks(req, res, next) {
     try {
       const id = req.userId;
-      const howMany = await BookService.insertBooks(id, req.body);
-      res.status(201).json(howMany);
+      await BookService.insertBooks(id, req.body);
+      res.status(201).json("Livros adicionado com sucesso!");
     } catch (error) {
       next(error);
     }
@@ -38,7 +38,7 @@ class BookController {
       const bookId = parseInt(req.params.id);
 
       AuthService.verifyHaveBookPermission(tokenId, bookId);
-      const book = await BookService.finishBook(bookId);
+      await BookService.finishBook(bookId);
       res.status(200).json(`Livro: ${bookId}, atualizado com sucesso!`);
     } catch (error) {
       next(error);
@@ -51,7 +51,7 @@ class BookController {
       const bookId = parseInt(req.params.id);
 
       AuthService.verifyHaveBookPermission(tokenId, bookId);
-      const book = await BookService.unfinishBook(bookId);
+      await BookService.unfinishBook(bookId);
       res.status(200).json(`Livro: ${bookId}, atualizado com sucesso!`);
     } catch (error) {
       next(error);

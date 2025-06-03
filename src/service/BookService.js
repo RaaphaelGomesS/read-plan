@@ -27,7 +27,10 @@ class BookService {
   }
 
   async insertBooks(id, data) {
-    const booksToInsert = data.map((book) => ({
+
+    console.log(data.books);
+
+    const booksToInsert = data.books.map((book) => ({
       title: book.title,
       author: book.authors.join(","),
       publisher: book.publisher,
@@ -37,34 +40,30 @@ class BookService {
       userId: id,
     }));
 
-    const howMany = await prisma.book.createMany({
+    console.log(booksToInsert);
+
+    await prisma.book.createMany({
       data: booksToInsert,
       skipDuplicates: true,
     });
-
-    return howMany;
   }
 
   async finishBook(id) {
     await this.findById(id);
 
-    const book = await prisma.book.update({
+    await prisma.book.update({
       where: { id },
       data: { finished: true },
     });
-
-    return book;
   }
 
-    async unfinishBook(id) {
+  async unfinishBook(id) {
     await this.findById(id);
 
-    const book = await prisma.book.update({
+    await prisma.book.update({
       where: { id },
       data: { finished: false },
     });
-
-    return book;
   }
 
   async deleteBook(id) {
