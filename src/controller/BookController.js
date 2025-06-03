@@ -45,7 +45,7 @@ class BookController {
     }
   }
 
-  async deleteUser(req, res, next) {
+  async deleteBook(req, res, next) {
     try {
       const tokenId = req.userId;
       const bookId = parseInt(req.params.id);

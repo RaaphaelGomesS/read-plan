@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import router from "./router/router.js";
+import UserRouter from "./router/UserRouter.js";
+import BookRouter from "./router/BookRouter.js";
 import "dotenv/config";
 
 const app = express();
@@ -9,7 +10,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use("/", router);
+app.use("/", UserRouter);
+app.use("/book", BookRouter);
 
 app.use((err, req, res, next) => {
   const status = err.statusCode || 500;
