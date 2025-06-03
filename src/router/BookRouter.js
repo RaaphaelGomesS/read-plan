@@ -8,6 +8,7 @@ router.get("/", AuthService.authentication, BookController.getListOfBooks);
 router.get("/finished", AuthService.authentication, BookController.getListOfFinishedBooks);
 router.post("/", AuthService.authentication, BookController.insertBooks);
 router.delete("/:id", AuthService.authentication, BookController.deleteBook);
-router.put("/:id", AuthService.authentication, BookController.finishBook);
+router.put("/finish/:id", AuthService.authentication, BookController.finishBook);
+router.put("/unfinish/:id", AuthService.authentication, BookController.unfinishBook);
 
 export default router;

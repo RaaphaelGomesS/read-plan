@@ -45,6 +45,19 @@ class BookController {
     }
   }
 
+    async unfinishBook(req, res, next) {
+    try {
+      const tokenId = req.userId;
+      const bookId = parseInt(req.params.id);
+
+      AuthService.verifyHaveBookPermission(tokenId, bookId);
+      const book = await BookService.unfinishBook(bookId);
+      res.status(200).json(`Livro: ${bookId}, atualizado com sucesso!`);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async deleteBook(req, res, next) {
     try {
       const tokenId = req.userId;

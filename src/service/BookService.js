@@ -47,11 +47,21 @@ class BookService {
 
   async finishBook(id) {
     await this.findById(id);
-    console.log(id);
 
     const book = await prisma.book.update({
       where: { id },
       data: { finished: true },
+    });
+
+    return book;
+  }
+
+    async unfinishBook(id) {
+    await this.findById(id);
+
+    const book = await prisma.book.update({
+      where: { id },
+      data: { finished: false },
     });
 
     return book;
