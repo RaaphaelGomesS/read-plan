@@ -38,8 +38,8 @@ class BookController {
       const bookId = parseInt(req.params.id);
 
       AuthService.verifyHaveBookPermission(tokenId, bookId);
-      await BookService.finishBook(bookId);
-      res.status(200);
+      const book = await BookService.finishBook(bookId);
+      res.status(200).json(`Livro: ${bookId}, atualizado com sucesso!`);
     } catch (error) {
       next(error);
     }
@@ -53,7 +53,7 @@ class BookController {
       AuthService.verifyHaveBookPermission(tokenId, bookId);
       await BookService.deleteBook(bookId);
 
-      res.status(200).json(`Mensagem: livro:${bookId}, deletado com sucesso!`);
+      res.status(200).json(`livro: ${bookId}, deletado com sucesso!`);
     } catch (error) {
       next(error);
     }

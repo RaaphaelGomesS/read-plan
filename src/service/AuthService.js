@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import UserService from "./UserService.js";
-import { UserError } from "../error/Error.js";
+import { UserError } from "../errors/Errors.js";
 import BookService from "./BookService.js";
 
 class AuthService {

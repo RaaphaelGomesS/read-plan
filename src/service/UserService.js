@@ -1,5 +1,5 @@
 import prisma from "../../prisma/prismaClient.js";
-import Validation from "../utils/Validation.js";
+import Validation from "../service/ValidationService.js";
 import { UserError } from "../errors/Errors.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
